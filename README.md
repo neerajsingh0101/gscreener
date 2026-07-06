@@ -98,6 +98,23 @@ need to copy.
 
 That's it. Screening starts immediately: new senders pile up in `@Screener/Pending`, your digest
 arrives daily at 8am (change `DIGEST_HOUR` in `Config.js`), and the dashboard is at the web app URL.
+## Updating
+
+When code in this repo changes and you want it on your install:
+
+1. Open your project at [script.google.com](https://script.google.com).
+2. Open each changed file, select everything, paste the new raw contents, and save (`⌘S`/`Ctrl+S`).
+3. Screening and digest changes take effect immediately — the triggers always run the latest
+   saved code.
+4. Dashboard (`WebApp`) changes additionally need a new deployment version, because the web app
+   URL serves a frozen snapshot:
+   1. Click **Deploy** → **Manage deployments**.
+   2. Click the **pencil icon**.
+   3. Under **Version**, choose **New version**.
+   4. Click **Deploy**, then **Done**. (The URL — and your bookmark — stay the same.)
+5. If the release notes say so, re-run `setup()` — it's always safe: it repairs labels, the
+   filter and triggers without touching your lists.
+
 ## Daily use
 
 - **Digest email** — arrives only on days something is pending. 👍 delivers all held mail from that
