@@ -154,7 +154,7 @@ const EXEMPTION_TYPES = ['domains', 'emails', 'keywords'];
 const DEFAULT_EXEMPTIONS = {
   domains: ['github.com', 'stripe.com'],
   emails: ['notifications@github.com'],
-  keywords: ['logincode', 'otp'],
+  keywords: ['login code', 'otp'],
 };
 
 function getExemptions(type) {

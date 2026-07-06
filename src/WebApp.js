@@ -47,7 +47,10 @@ function handleAddExemption(type, rawValue) {
       return '"' + value + '" is not an email address — did you mean the domains list?';
     }
   } else {
-    value = value.toLowerCase();
+    // HTML form GETs encode spaces as '+', and Apps Script hands the '+'
+    // through undecoded. Keywords never legitimately contain one, so map it
+    // back to the space the user typed.
+    value = value.replace(/\+/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
   }
 
   if (value.length < 2) return 'That value is too short.';
