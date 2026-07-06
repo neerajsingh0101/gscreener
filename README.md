@@ -116,8 +116,11 @@ When code in this repo changes and you want it on your install:
    2. Click the **pencil icon**.
    3. Under **Version**, choose **New version**.
    4. Click **Deploy**, then **Done**. (The URL — and your bookmark — stay the same.)
-5. If the release notes say so, re-run `setup()` — it's always safe: it repairs labels, the
-   filter and triggers without touching your lists.
+5. Finish every update by re-running `setup()` — always, even when `Setup.gs` itself didn't
+   change: click `Setup.gs` in the Files list, choose `setup` in the toolbar dropdown, and click
+   **Run**. `setup()` is idempotent, so running it any number of times is safe: it repairs the
+   labels, filter and triggers, and seeds any newly added defaults — without ever touching lists
+   you've changed or entries you've removed.
 
 ## Daily use
 
