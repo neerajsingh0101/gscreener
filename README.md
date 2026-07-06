@@ -85,10 +85,15 @@ need to copy.
     code is this repo, running under your own account, visible to no one else.
 36. Grant the Gmail permissions. The script asks for the minimum it needs: modify labels
     (`gmail.modify`), manage filters (`gmail.settings.basic`), and manage its own triggers.
-37. Click **Deploy** (top right) → **New deployment**.
-38. Click the gear next to "Select type" and choose **Web app**.
-39. Set *Execute as:* **Me** and *Who has access:* **Only myself**, then click **Deploy**.
-40. Copy the web app URL and bookmark it — that's your screening dashboard, and the digest's
+37. Click **Deploy** (top right).
+38. Click **New deployment**.
+39. Click the gear next to "Select type" and choose **Web app**.
+40. In the **Description** box, type `Gmail Screener dashboard`. (It's just a label for this
+    deployment — it has no effect on behavior.)
+41. *Execute as:* should already show **Me (your email)** — leave it.
+42. Set *Who has access:* to **Only myself**.
+43. Click **Deploy**.
+44. Copy the web app URL and bookmark it — that's your screening dashboard, and the digest's
     👍/👎 buttons go through it too.
 
 That's it. Screening starts immediately: new senders pile up in `@Screener/Pending`, your digest
