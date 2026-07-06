@@ -47,57 +47,61 @@ need to copy.
    If your digest should arrive on a different clock, change `timeZone` to your
    [IANA time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 10. Press `⌘S`/`Ctrl+S` to save.
-11. Click `Code.gs` in the Files list.
-12. Select everything and replace it with the contents of
+11. In the Files list, hover over `Code.gs` and click the **⋮** (three-dot) menu that appears.
+12. Choose **Rename**.
+13. Type `Config` — no extension — and press **Enter**. (Every new project starts with a file
+    called `Code.gs`; renaming it keeps your files matching this repo one-to-one.)
+14. Select everything in it and replace it with the contents of
     [`Config.js` (raw)](https://raw.githubusercontent.com/neerajsingh0101/gmail-screener/main/src/Config.js).
-    Save (`⌘S`/`Ctrl+S`).
-13. Click the **＋** next to "Files".
-14. Choose **Script**.
-15. Type `Setup` as the name — just `Setup`, no extension. (The editor adds `.gs` itself; typing
+15. Save (`⌘S`/`Ctrl+S`).
+16. Click the **＋** next to "Files".
+17. Choose **Script**.
+18. Type `Setup` as the name — just `Setup`, no extension. (The editor adds `.gs` itself; typing
     `Setup.js` gets you a messy `Setup.js.gs`.)
-16. Paste in the contents of
+19. Paste in the contents of
     [`Setup.js` (raw)](https://raw.githubusercontent.com/neerajsingh0101/gmail-screener/main/src/Setup.js).
-17. Save (`⌘S`/`Ctrl+S`).
-18. Click the **＋** next to "Files".
-19. Choose **Script**.
-20. Type `Screener` as the name — no extension.
-21. Paste in the contents of
+20. Save (`⌘S`/`Ctrl+S`).
+21. Click the **＋** next to "Files".
+22. Choose **Script**.
+23. Type `Screener` as the name — no extension.
+24. Paste in the contents of
     [`Screener.js` (raw)](https://raw.githubusercontent.com/neerajsingh0101/gmail-screener/main/src/Screener.js).
-22. Save (`⌘S`/`Ctrl+S`).
-23. Click the **＋** next to "Files".
-24. Choose **Script**.
-25. Type `Digest` as the name — no extension.
-26. Paste in the contents of
+25. Save (`⌘S`/`Ctrl+S`).
+26. Click the **＋** next to "Files".
+27. Choose **Script**.
+28. Type `Digest` as the name — no extension.
+29. Paste in the contents of
     [`Digest.js` (raw)](https://raw.githubusercontent.com/neerajsingh0101/gmail-screener/main/src/Digest.js).
-27. Save (`⌘S`/`Ctrl+S`).
-28. Click the **＋** next to "Files".
-29. Choose **Script**.
-30. Type `WebApp` as the name — no extension.
-31. Paste in the contents of
+30. Save (`⌘S`/`Ctrl+S`).
+31. Click the **＋** next to "Files".
+32. Choose **Script**.
+33. Type `WebApp` as the name — no extension.
+34. Paste in the contents of
     [`WebApp.js` (raw)](https://raw.githubusercontent.com/neerajsingh0101/gmail-screener/main/src/WebApp.js).
-32. Save (`⌘S`/`Ctrl+S`).
-33. Click `Setup.gs` in the Files list. (The toolbar's function dropdown only lists functions
+35. Save (`⌘S`/`Ctrl+S`).
+36. Click `Setup.gs` in the Files list. (The toolbar's function dropdown only lists functions
     from the file that's currently open — and only once it's saved.)
-34. In the toolbar, open the function dropdown (next to **Debug**), choose **`setup`**, and click
+37. In the toolbar, open the function dropdown (next to **Debug**), choose **`setup`**, and click
     **Run**.
-35. Authorize when asked. You'll see **"Google hasn't verified this app"** — click
+38. Authorize when asked. You'll see **"Google hasn't verified this app"** — click
     **Advanced → Go to Gmail Screener (unsafe)**. "Unsafe" only means Google didn't audit it: the
     code is this repo, running under your own account, visible to no one else.
-36. Grant the Gmail permissions. The script asks for the minimum it needs: modify labels
+39. Grant the Gmail permissions. The script asks for the minimum it needs: modify labels
     (`gmail.modify`), manage filters (`gmail.settings.basic`), and manage its own triggers.
-37. Click **Deploy** (top right).
-38. Click **New deployment**.
-39. Click the gear next to "Select type" and choose **Web app**.
-40. In the **Description** box, type `Gmail Screener dashboard`. (It's just a label for this
+40. Click **Deploy** (top right).
+41. Click **New deployment**.
+42. Click the gear next to "Select type" and choose **Web app**.
+43. In the **Description** box, type `Gmail Screener dashboard`. (It's just a label for this
     deployment — it has no effect on behavior.)
-41. *Execute as:* should already show **Me (your email)** — leave it.
-42. Set *Who has access:* to **Only myself**.
-43. Click **Deploy**.
-44. Copy the web app URL and bookmark it — that's your screening dashboard, and the digest's
+44. *Execute as:* should already show **Me (your email)** — leave it.
+45. Set *Who has access:* to **Only myself**.
+46. Click **Deploy**.
+47. Copy the web app URL and bookmark it — that's your screening dashboard, and the digest's
     👍/👎 buttons go through it too.
 
 That's it. Screening starts immediately: new senders pile up in `@Screener/Pending`, your digest
 arrives daily at 8am (change `DIGEST_HOUR` in `Config.js`), and the dashboard is at the web app URL.
+
 ## Updating
 
 When code in this repo changes and you want it on your install:
