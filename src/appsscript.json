@@ -1,0 +1,23 @@
+{
+  "timeZone": "America/New_York",
+  "runtimeVersion": "V8",
+  "exceptionLogging": "STACKDRIVER",
+  "dependencies": {
+    "enabledAdvancedServices": [
+      {
+        "userSymbol": "Gmail",
+        "version": "v1",
+        "serviceId": "gmail"
+      }
+    ]
+  },
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/gmail.modify",
+    "https://www.googleapis.com/auth/gmail.settings.basic",
+    "https://www.googleapis.com/auth/script.scriptapp"
+  ],
+  "webapp": {
+    "executeAs": "USER_DEPLOYING",
+    "access": "MYSELF"
+  }
+}
