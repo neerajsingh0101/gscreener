@@ -60,11 +60,11 @@ function buildSenderCard(email) {
   section.addWidget(CardService.newTextParagraph().setText('<b>' + escapeHtml(email) + '</b>'));
 
   if (verdict === VERDICT.approved) {
-    section.addWidget(statusParagraph('👍 <b>This email is approved.</b>'));
+    section.addWidget(statusParagraph('<b>This email is approved 👍</b>.'));
   } else if (verdict === VERDICT.rejected) {
-    section.addWidget(statusParagraph('👎 <b>This email is rejected.</b>'));
+    section.addWidget(statusParagraph('<b>This email is rejected 👎</b>.'));
   } else if (exemption) {
-    section.addWidget(statusParagraph('✨ <b>Delivered via exemption (' + exemption + ').</b>'));
+    section.addWidget(statusParagraph('<b>Delivered via exemption (' + exemption + ') ✨</b>.'));
   } else {
     section.addWidget(CardService.newTextParagraph().setText('⏳ Awaiting your verdict'));
     section.addWidget(verdictButtons(email));
