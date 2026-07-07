@@ -169,9 +169,11 @@ Three lists (managed from the dashboard) let mail bypass screening entirely:
 - **Domains** — `github.com` delivers mail from any `…@github.com` address, subdomains included
   (`notifications@mail.github.com` matches too).
 - **Email addresses** — specific senders, e.g. `noreply@stripe.com`.
-- **Subject keywords** — if the subject contains the phrase (case-insensitive substring), the
-  email is delivered no matter who sent it. `login code`, `OTP`, `password` and `verification`
-  cover most sign-in, sign-up and password-reset flows.
+- **Subject keywords** — if the subject contains the phrase (substring match), the email is
+  delivered no matter who sent it. `login code`, `OTP`, `password` and `verification` cover most
+  sign-in, sign-up and password-reset flows.
+
+Matching for all three lists is case-insensitive.
 
 New installs start pre-seeded with a few defaults — domains `github.com` and `stripe.com`, address
 `notifications@github.com`, keywords `login code` and `otp`. Remove any of them from the dashboard;

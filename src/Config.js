@@ -200,19 +200,27 @@ function normalizeDomain(raw) {
 }
 
 // Returns why this email bypasses screening ('domain', 'email' or 'keyword'),
-// or null if it doesn't. Expects a normalized sender address.
+// or null if it doesn't. All matching is case-insensitive on both sides, so
+// values added with any casing (e.g. via addExemption in the editor) still
+// match.
 function exemptionMatch(fromEmail, subject) {
-  const domain = fromEmail.split('@')[1] || '';
-  const domainHit = getExemptions('domains').some(function (exempt) {
+  const sender = String(fromEmail).toLowerCase();
+  const domain = sender.split('@')[1] || '';
+
+  const domainHit = getExemptions('domains').some(function (raw) {
+    const exempt = String(raw).toLowerCase();
     return domain === exempt || domain.endsWith('.' + exempt);
   });
   if (domainHit) return 'domain';
 
-  if (getExemptions('emails').indexOf(fromEmail) !== -1) return 'email';
+  const emailHit = getExemptions('emails').some(function (raw) {
+    return String(raw).toLowerCase() === sender;
+  });
+  if (emailHit) return 'email';
 
   const subjectLower = String(subject || '').toLowerCase();
-  const keywordHit = getExemptions('keywords').some(function (keyword) {
-    return subjectLower.indexOf(keyword) !== -1; // keywords are stored lowercase
+  const keywordHit = getExemptions('keywords').some(function (raw) {
+    return subjectLower.indexOf(String(raw).toLowerCase()) !== -1;
   });
   return keywordHit ? 'keyword' : null;
 }

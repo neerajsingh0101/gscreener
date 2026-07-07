@@ -139,8 +139,8 @@ function renderDashboard(notice) {
     'The sender is not approved by it, and an explicit rejection still wins: if you have rejected ' +
     'someone and they send an email containing one of your exemption keywords in the subject, it ' +
     'will not be delivered — an explicit rejection always wins.</p>' +
-    exemptionBlock(url, 'domains', 'Exemption Domains', 'Any email address from these domains will not be held for screening and will be delivered to your inbox.', 'github.com') +
-    exemptionBlock(url, 'emails', 'Exemption Email Addresses', 'Emails from these specific email addresses will not be held for screening and will be delivered to your inbox.', 'noreply@stripe.com') +
+    exemptionBlock(url, 'domains', 'Exemption Domains', 'Any email address from these domains will not be held for screening and will be delivered to your inbox. Matching is case-insensitive.', 'github.com') +
+    exemptionBlock(url, 'emails', 'Exemption Email Addresses', 'Emails from these specific email addresses will not be held for screening and will be delivered to your inbox. Matching is case-insensitive.', 'noreply@stripe.com') +
     exemptionBlock(url, 'keywords', 'Exemption Keywords', 'Emails with subjects containing any of these keywords will skip screening and be delivered directly to your inbox. Keyword matching is case-insensitive.', 'login code') +
     '<h2>Approved senders (' + verdicts.approved.length + ')</h2>' +
     '<ul>' + verdictList(verdicts.approved) + '</ul>' +
