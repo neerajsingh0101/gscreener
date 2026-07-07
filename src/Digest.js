@@ -28,7 +28,7 @@ function sendDigest() {
     '</div>';
 
   const subject =
-    'Screener digest: ' + senders.length + (senders.length === 1 ? ' sender' : ' senders') + ' awaiting review';
+    'Gmail Screener Digest: ' + senders.length + (senders.length === 1 ? ' sender' : ' senders') + ' awaiting review';
   const messageId = sendHtmlEmail(getConfig('selfEmail'), subject, html);
 
   // The catch-all filter routes even this digest away from the inbox; put it
