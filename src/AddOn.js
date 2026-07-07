@@ -10,7 +10,7 @@ function onGmailMessageOpen(e) {
     metadataHeaders: ['From'],
   });
   const from = headerValue(message, 'From') || '';
-  return buildSenderCard(normalizeEmail(from), '');
+  return buildSenderCard(normalizeEmail(from));
 }
 
 // Home card — shown when the add-on is opened without a message.
@@ -49,34 +49,41 @@ function onAddOnHomepage() {
   return builder.addSection(section).build();
 }
 
-function buildSenderCard(email, notice) {
+// One clean card per state: after a verdict the card shows only the bold
+// status headline and a link to the dashboard listing where it can be
+// changed. Buttons appear only while a verdict is still pending.
+function buildSenderCard(email) {
   const verdict = getVerdict(email);
-  const exemption = exemptionMatch(email, '');
+  const exemption = verdict ? null : exemptionMatch(email, '');
+  const section = CardService.newCardSection();
+  let title;
 
-  let status;
   if (verdict === VERDICT.approved) {
-    status = '✅ Approved — mail from this sender is delivered normally.';
+    title = '👍 This email is approved';
+    section.addWidget(changeLinkParagraph());
   } else if (verdict === VERDICT.rejected) {
-    status = '🚫 Rejected — mail from this sender goes to ' + LABELS.rejected + '.';
+    title = '👎 This email is rejected';
+    section.addWidget(changeLinkParagraph());
   } else if (exemption) {
-    status = '✨ Exempt (' + exemption + ') — delivered without screening.';
+    title = '✨ Delivered via exemption (' + exemption + ')';
+    section.addWidget(changeLinkParagraph());
   } else {
-    status = '⏳ Awaiting your verdict — held in ' + LABELS.pending + '.';
+    title = '⏳ Awaiting your verdict';
+    section.addWidget(verdictButtons(email));
   }
 
-  const section = CardService.newCardSection()
-    .addWidget(
-      CardService.newDecoratedText().setTopLabel('Sender').setText(email).setWrapText(true)
-    )
-    .addWidget(
-      CardService.newTextParagraph().setText((notice ? notice + '<br><br>' : '') + status)
-    )
-    .addWidget(verdictButtons(email));
-
   return CardService.newCardBuilder()
-    .setHeader(CardService.newCardHeader().setTitle('Gmail Screener'))
+    .setHeader(CardService.newCardHeader().setTitle(title))
     .addSection(section)
     .build();
+}
+
+function changeLinkParagraph() {
+  const url = webAppUrl();
+  const text = url
+    ? 'If you want to change it, <a href="' + url + '">click here</a>.'
+    : 'You can change this on the dashboard (deploy the web app to enable the link).';
+  return CardService.newTextParagraph().setText(text);
 }
 
 function verdictButtons(email) {
@@ -104,24 +111,18 @@ function verdictButtons(email) {
 function addonApprove(e) {
   const email = e.parameters.email;
   const released = approveSender(email);
-  return addonActionResponse(
-    email,
-    '👍 Approved ' + email + ' — released ' + released + ' held email(s) to your inbox.'
-  );
+  return addonActionResponse(email, '👍 Approved — released ' + released + ' held email(s).');
 }
 
 function addonReject(e) {
   const email = e.parameters.email;
   const moved = rejectSender(email);
-  return addonActionResponse(
-    email,
-    '👎 Rejected ' + email + ' — moved ' + moved + ' email(s) to ' + LABELS.rejected + '.'
-  );
+  return addonActionResponse(email, '👎 Rejected — moved ' + moved + ' email(s) out of screening.');
 }
 
-function addonActionResponse(email, text) {
+function addonActionResponse(email, toast) {
   return CardService.newActionResponseBuilder()
-    .setNotification(CardService.newNotification().setText(text))
-    .setNavigation(CardService.newNavigation().updateCard(buildSenderCard(email, text)))
+    .setNotification(CardService.newNotification().setText(toast))
+    .setNavigation(CardService.newNavigation().updateCard(buildSenderCard(email)))
     .build();
 }
