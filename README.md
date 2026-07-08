@@ -135,33 +135,31 @@ arrives daily at 8am (change `DIGEST_HOUR` in `Config.js`), and the dashboard is
 
 ### Install by agent
 
-If you use an AI coding agent that can drive a browser — Claude Code, Codex, and friends — you
-can hand it the manual steps instead of clicking through them yourself.
+Don't want to click through all those steps yourself? An AI agent that can drive a web browser
+can do the whole thing for you. You just handle the two moments that need a human — signing into
+Google and approving the permissions — and the agent does everything else. You don't need to be a
+developer.
 
-With Claude Code:
+One catch worth knowing: plain chat at **claude.ai** or **chatgpt.com** can't do this on its own.
+Those answer in text; they can't click buttons inside your browser. You need a version that can
+actually *control a browser*:
 
-1. Give Claude browser control by adding Google's Chrome DevTools MCP server, then restart the
-   session so the browser tools load:
+- **Claude in Chrome** — a browser extension (included with paid Claude plans) that clicks and
+  types in your own Chrome, where you're already signed into Google. Get it at
+  [claude.com/claude-for-chrome](https://claude.com/claude-for-chrome).
+- **ChatGPT agent mode** — turn on **Agent** in ChatGPT (Plus and up); it runs its own browser
+  and pauses for you to sign in when needed. See [ChatGPT agent](https://chatgpt.com/features/agent/).
 
-   ```
-   claude mcp add chrome-devtools -- npx -y chrome-devtools-mcp@latest
-   ```
+Once it can see your browser, paste this:
 
-2. Paste this prompt:
+> Install Gmail Screener for me by following the "Install manually" steps in the README at
+> https://github.com/neerajsingh0101/gmail-screener. Do all the clicking and pasting yourself.
+> Two things need me: when Google asks me to sign in, and when the "Gmail Screener wants access"
+> permission screen appears — pause and let me handle those, then keep going. When you're done,
+> tell me my dashboard URL and confirm the side panel is installed.
 
-   > Fire up the Chrome MCP and install Gmail Screener from
-   > https://github.com/neerajsingh0101/gmail-screener by following the "Install manually"
-   > steps in its README. Ask me to sign into Google in your browser window when it opens,
-   > and to approve the Google authorization prompt when it appears — do everything else
-   > yourself. When you're done, verify the install: labels created, filter in place,
-   > triggers running, web app deployed, side panel installed.
-
-3. You'll be needed exactly twice: once to sign into Google in the agent's Chrome window
-   (a one-time login — the agent cannot and should not know your password), and once to
-   click through the authorization screen. The agent handles the other fifty steps.
-
-Other agents work the same way: give them a browser, point them at this README, and stay nearby
-for the sign-in and the authorization prompt.
+You'll be needed exactly twice — the Google sign-in and the permission approval (the agent can't
+and shouldn't know your password or grant Gmail access for you). It handles everything else.
 
 ## Updating code
 
