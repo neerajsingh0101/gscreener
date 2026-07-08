@@ -72,7 +72,8 @@ function buildSenderCard(email) {
     if (dash) {
       // Small, secondary link — e.g. to approve the sender's whole domain.
       section.addWidget(CardService.newTextParagraph().setText(
-        '<font color="#5f6368"><a href="' + dash + '">Click here to visit Gscreener dashboard</a></font>'
+        '<a href="' + dash + '"><font color="#5f6368">Click here</font></a>' +
+        '<font color="#5f6368"> to visit Gscreener dashboard</font>'
       ));
     }
   }
