@@ -29,6 +29,13 @@ recoverable, just never in your inbox.
 Your sender lists live in the script's own storage (Script Properties). Your mail never leaves
 Gmail; the script only reads message headers (From/To/Subject) and moves labels around.
 
+## Cost
+
+Zero — always. Everything runs as a Google Apps Script inside your own Google account: there is
+no server to rent, no third-party service, and no subscription. Google's free Apps Script quotas
+comfortably cover a personal mailbox, so deploying and running this whole operation costs
+nothing.
+
 ## Install (~5 minutes)
 
 One action per step. Code links open the **raw** file, so `⌘A`/`Ctrl+A` selects exactly what you
