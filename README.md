@@ -20,7 +20,9 @@ People you write to are approved automatically.
 
 - [Cost](#cost)
 - [Security](#security)
-- [Install (~5 minutes)](#install-5-minutes)
+- [Installation steps](#installation-steps)
+  - [Install manually](#install-manually)
+  - [Install by agent](#install-by-agent)
 - [Updating code](#updating-code)
 - [Daily use](#daily-use)
 - [The Gmail side panel](#the-gmail-side-panel)
@@ -46,7 +48,12 @@ and your sender lists never leave your Google account, and no third party is inv
 Having said that, a fair warning: software can always have vulnerabilities. If you notice any
 security-related issue, please contact [me](https://github.com/neerajsingh0101).
 
-## Install (~5 minutes)
+## Installation steps
+
+The steps below can be followed two ways: by hand, or by an AI agent that can drive a browser.
+Both paths run exactly the same steps — pick whichever suits you.
+
+### Install manually
 
 One action per step. Code links open the **raw** file, so `⌘A`/`Ctrl+A` selects exactly what you
 need to copy.
@@ -125,6 +132,37 @@ need to copy.
 
 That's it. Screening starts immediately: new senders pile up in `@Screener/Pending`, your digest
 arrives daily at 8am (change `DIGEST_HOUR` in `Config.js`), and the dashboard is at the web app URL.
+
+### Install by agent
+
+If you use an AI coding agent that can drive a browser — Claude Code, Codex, and friends — you
+can hand it the manual steps instead of clicking through them yourself. (This is how the project
+itself is maintained: an agent operating the Apps Script editor through Chrome.)
+
+With Claude Code:
+
+1. Give Claude browser control by adding Google's Chrome DevTools MCP server, then restart the
+   session so the browser tools load:
+
+   ```
+   claude mcp add chrome-devtools -- npx -y chrome-devtools-mcp@latest
+   ```
+
+2. Paste this prompt:
+
+   > Fire up the Chrome MCP and install Gmail Screener from
+   > https://github.com/neerajsingh0101/gmail-screener by following the "Install manually"
+   > steps in its README. Ask me to sign into Google in your browser window when it opens,
+   > and to approve the Google authorization prompt when it appears — do everything else
+   > yourself. When you're done, verify the install: labels created, filter in place,
+   > triggers running, web app deployed, side panel installed.
+
+3. You'll be needed exactly twice: once to sign into Google in the agent's Chrome window
+   (a one-time login — the agent cannot and should not know your password), and once to
+   click through the authorization screen. The agent handles the other fifty steps.
+
+Other agents work the same way: give them a browser, point them at this README, and stay nearby
+for the sign-in and the authorization prompt.
 
 ## Updating code
 
