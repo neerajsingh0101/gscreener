@@ -1,16 +1,20 @@
 # Gmail Screener
 
-Email screening for Gmail, inspired by [HEY's Screener](https://www.hey.com/features/the-screener/) —
-as a free Google Apps Script you run on your own account. No servers, no third parties, no cost: the script
-lives in your Google account, runs on Google's infrastructure, and never sends your mail anywhere.
+Email is a beautiful thing. However, these days anyone can send an email to you, and that leads
+to all kinds of spam. To prevent this, I like to control the situation.
+
+[HEY](https://www.hey.com/features/the-screener/) introduced a screener service, which I really
+like. But because I am so intertwined with the Google Workspace ecosystem, I could not move to
+HEY. So, inspired by their Screener, I built Gmail Screener.
+
+No servers, no third-party services, and no cost. The script lives in your Google account, runs
+on Google's infrastructure, and never sends your email anywhere. Nothing is ever deleted — you
+are in full control.
 
 **How it works:** email from anyone not on your approved list never reaches your inbox. It waits
 under a `@Screener/Pending` label until you give the sender a 👍 (deliver now and forever) or a 👎
 (never see them again). A daily digest email lists everyone awaiting review with one-click buttons.
 People you write to are approved automatically.
-
-Nothing is ever deleted. Rejected mail stays in your Gmail under `@Screener/Rejected` — searchable,
-recoverable, just never in your inbox.
 
 ## Contents
 
