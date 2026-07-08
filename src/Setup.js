@@ -27,22 +27,25 @@ function ensureLabels() {
     existing[label.name] = label.id;
   });
 
-  function ensure(name, hidden) {
-    if (existing[name]) return existing[name];
+  // The screener labels are plumbing — you review pending mail from the daily
+  // digest and dashboard, not by clicking a label — so all three are hidden
+  // from the Gmail sidebar. Visibility is enforced on every run, so re-running
+  // setup() re-hides them even if they were created (or shown) earlier.
+  function ensure(name) {
+    if (existing[name]) {
+      Gmail.Users.Labels.patch({ labelListVisibility: 'labelHide' }, 'me', existing[name]);
+      return existing[name];
+    }
     return Gmail.Users.Labels.create(
-      {
-        name: name,
-        labelListVisibility: hidden ? 'labelHide' : 'labelShow',
-        messageListVisibility: 'show',
-      },
+      { name: name, labelListVisibility: 'labelHide', messageListVisibility: 'show' },
       'me'
     ).id;
   }
 
   const ids = {
-    triage: ensure(LABELS.triage, true),
-    pending: ensure(LABELS.pending, false),
-    rejected: ensure(LABELS.rejected, false),
+    triage: ensure(LABELS.triage),
+    pending: ensure(LABELS.pending),
+    rejected: ensure(LABELS.rejected),
   };
   setConfig('labelTriage', ids.triage);
   setConfig('labelPending', ids.pending);

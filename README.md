@@ -273,20 +273,36 @@ Three deliberate design decisions worth knowing:
 
 ## How it works
 
-1. `setup()` creates three labels and one catch-all Gmail filter ("larger:1" matches every email)
-   that makes all incoming mail skip the inbox and land in a hidden `Gscreener/Triage` label.
-2. A time trigger runs `screenNewMail()` every minute. Mail from approved senders is moved to the
-   inbox (you'll rarely notice the ≤1 minute delay). Mail from rejected senders goes to
-   `Gscreener/Rejected`. Mail matching an [exemption](#exemptions) — sender domain or subject
-   keyword — is delivered immediately even from unknown senders. Everyone else waits in
-   `Gscreener/Pending`.
-3. The same pass scans your Sent mail: anyone you email is added to the approved list.
-4. Once a day, `sendDigest()` emails you the list of senders awaiting review with 👍/👎 buttons.
-   The buttons hit a private web app (`doGet`) only your Google account can access, which also
-   serves a dashboard with your pending/approved/rejected lists.
+**The screening strategy.** Nothing can stop an email from being *delivered* to your Gmail —
+once someone sends it, it lands in your account no matter what. So Gscreener can't literally hold
+mail back before it arrives. Instead it does the next best thing, entirely with Gmail labels
+inside your own mailbox:
 
-Your sender lists live in the script's own storage (Script Properties). Your mail never leaves
-Gmail; the script only reads message headers (From/To/Subject) and moves labels around.
+1. A single catch-all Gmail filter (`larger:1`, which matches every email) fires the instant any
+   mail arrives and immediately pulls it **out of the inbox** into a hidden staging label,
+   `Gscreener/Triage`. So no email is ever seen in your inbox unscreened.
+2. A script runs every minute, looks at who each staged email is *from*, and re-labels it: mail
+   from an **approved** sender is put in your inbox; mail from a **rejected** sender goes to
+   `Gscreener/Rejected`; mail from an **unknown** sender waits in `Gscreener/Pending`; and mail
+   matching an [exemption](#exemptions) (sender domain or subject keyword) is delivered straight to
+   the inbox even from an unknown sender.
+
+That's the whole trick — a catch-all "skip inbox" filter plus a script that sorts by sender. It's
+the same approach [HEY](https://www.hey.com/features/the-screener/) uses. Nothing is ever deleted
+or sent anywhere; the script only reads message headers (From/To/Subject) and moves labels around.
+
+All three `Gscreener/*` labels are **hidden** from your Gmail sidebar — they're plumbing you never
+need to open. You review pending senders from the daily digest email and the dashboard, not by
+clicking a label.
+
+A few more details:
+
+- The same minute-by-minute pass also scans your **Sent** mail: anyone you email is added to your
+  approved list automatically, so people you reach out to are never screened.
+- Once a day, `sendDigest()` emails you the senders awaiting review with 👍/👎 buttons. Those
+  buttons (and the dashboard) are a private web app only your own Google account can open.
+- Your approved/rejected/exemption lists live in the script's own storage (Script Properties),
+  inside your Google account. Nothing leaves Gmail.
 
 ## Uninstall
 
