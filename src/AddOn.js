@@ -18,7 +18,7 @@ function onAddOnHomepage() {
   const senders = pendingSenders();
   const builder = CardService.newCardBuilder().setHeader(
     CardService.newCardHeader()
-      .setTitle('Gmail Screener')
+      .setTitle('Gscreener')
       .setSubtitle(senders.length + ' awaiting review')
   );
 

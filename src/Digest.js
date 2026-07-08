@@ -20,7 +20,7 @@ function sendDigest() {
 
   const html =
     '<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:680px">' +
-    '<h2 style="margin:0 0 4px">Gmail Screener</h2>' +
+    '<h2 style="margin:0 0 4px">Gscreener</h2>' +
     '<p style="margin:0 0 16px;color:#555">' + intro + '</p>' +
     '<table cellpadding="8" cellspacing="0" style="border-collapse:collapse;width:100%">' + rows + '</table>' +
     '<p style="margin:16px 0 0;color:#888;font-size:12px">Held mail stays under ' + escapeHtml(LABELS.pending) +
@@ -28,7 +28,7 @@ function sendDigest() {
     '</div>';
 
   const subject =
-    'Gmail Screener Digest: ' + senders.length + (senders.length === 1 ? ' sender' : ' senders') + ' awaiting review';
+    'Gscreener Digest: ' + senders.length + (senders.length === 1 ? ' sender' : ' senders') + ' awaiting review';
   const messageId = sendHtmlEmail(getConfig('selfEmail'), subject, html);
 
   // The catch-all filter routes even this digest away from the inbox; put it

@@ -16,7 +16,7 @@ function setup() {
   migrateEmailExemptionsToApproved();
   setConfig('lastSentScan', String(Math.floor(Date.now() / 1000)));
 
-  Logger.log('Gmail Screener installed for %s.', self);
+  Logger.log('Gscreener installed for %s.', self);
   Logger.log('From now on, mail from unknown senders is held under %s.', LABELS.pending);
   Logger.log('Next: Deploy > New deployment > Web app (Execute as me / Only myself) to enable the dashboard and the digest buttons.');
 }
@@ -121,7 +121,7 @@ function uninstall() {
 
   releaseAllHeldMail();
   Logger.log('Uninstalled: filter and triggers removed, held mail released to the inbox.');
-  Logger.log('Labels and sender verdicts were kept. Delete the %s labels and Script Properties for a clean slate.', '@Screener');
+  Logger.log('Labels and sender verdicts were kept. Delete the %s labels and Script Properties for a clean slate.', 'Gscreener');
 }
 
 function releaseAllHeldMail() {

@@ -20,8 +20,8 @@
   ],
   "addOns": {
     "common": {
-      "name": "Gmail Screener",
-      "logoUrl": "https://raw.githubusercontent.com/neerajsingh0101/gmail-screener/main/assets/icon.png"
+      "name": "Gscreener",
+      "logoUrl": "https://raw.githubusercontent.com/neerajsingh0101/gscreener/main/assets/icon.png"
     },
     "gmail": {
       "homepageTrigger": {

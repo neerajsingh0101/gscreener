@@ -1,4 +1,4 @@
-// Gmail Screener — settings and shared helpers.
+// Gscreener — settings and shared helpers.
 //
 // Everything a user might want to tweak lives in the two constants below.
 // State (label ids, sender verdicts) is kept in Script Properties, entirely
@@ -8,9 +8,9 @@ const DIGEST_HOUR = 8; // 0-23, in the script's time zone (appsscript.json)
 const POLL_MINUTES = 1; // how often new mail is screened: 1, 5, 10, 15 or 30
 
 const LABELS = {
-  triage: '@Screener/Triage', // transient queue fed by the Gmail filter (hidden)
-  pending: '@Screener/Pending', // mail from senders awaiting your verdict
-  rejected: '@Screener/Rejected', // mail from senders you rejected
+  triage: 'Gscreener/Triage', // transient queue fed by the Gmail filter (hidden)
+  pending: 'Gscreener/Pending', // mail from senders awaiting your verdict
+  rejected: 'Gscreener/Rejected', // mail from senders you rejected
 };
 
 const VERDICT = { approved: 'approved', rejected: 'rejected' };

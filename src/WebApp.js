@@ -2,7 +2,7 @@
 // (Execute as me / Only myself). The digest's approve/reject buttons land
 // here too, and the Exemptions section is managed from this page.
 //
-// Visual design follows the "Gmail Screener Dashboard" Claude Design project:
+// Visual design follows the "Gscreener Dashboard" Claude Design project:
 // Public Sans, warm off-white page, white cards, terracotta accent.
 
 function doGet(e) {
@@ -39,7 +39,7 @@ function doGet(e) {
     }
   }
 
-  return HtmlService.createHtmlOutput(renderDashboard(notice)).setTitle('Gmail Screener Dashboard');
+  return HtmlService.createHtmlOutput(renderDashboard(notice)).setTitle('Gscreener Dashboard');
 }
 
 function handleAddExemption(type, rawValue) {
@@ -84,7 +84,7 @@ function renderDashboard(notice) {
     '<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">' +
     '<style>' + dashboardCss() + '</style>' +
     '</head><body><div class="page"><div class="column">' +
-    '<header class="masthead"><h1>Gmail Screener Dashboard</h1>' +
+    '<header class="masthead"><h1>Gscreener Dashboard</h1>' +
     '<p class="tagline">Manage what reaches your inbox</p></header>' +
     (notice ? '<div class="notice">' + escapeHtml(notice) + '</div>' : '') +
     pendingCard(url, senders) +

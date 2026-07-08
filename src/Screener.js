@@ -2,7 +2,7 @@
 
 function screenNewMail() {
   const triageId = getConfig('labelTriage');
-  if (!triageId) throw new Error('Gmail Screener: run setup() first.');
+  if (!triageId) throw new Error('Gscreener: run setup() first.');
 
   const lock = LockService.getScriptLock();
   if (!lock.tryLock(0)) return; // a previous run is still working through a backlog
