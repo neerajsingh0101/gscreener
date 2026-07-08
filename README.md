@@ -50,8 +50,8 @@ security-related issue, please contact [me](https://github.com/neerajsingh0101).
 
 ## Installation steps
 
-The steps below can be followed two ways: by hand, or by an AI agent that can drive a browser.
-Both paths run exactly the same steps — pick whichever suits you.
+The steps below can be followed two ways: **by hand**, or **by an AI agent** that can drive a
+browser. Both paths run exactly the same steps — pick whichever suits you.
 
 ### Install manually
 
