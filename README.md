@@ -36,6 +36,16 @@ no server to rent, no third-party service, and no subscription. Google's free Ap
 comfortably cover a personal mailbox, so deploying and running this whole operation costs
 nothing.
 
+## Security
+
+Every line of this project is open source, so you can review exactly what the code does before
+running it. You also deploy it yourself, into your own Google Apps Script environment — your mail
+and your sender lists never leave your Google account, and no third party is involved.
+
+Having said that, a fair warning: software can always have vulnerabilities. If you notice any
+security-related issue, please contact [the author](https://github.com/neerajsingh0101) of this
+project.
+
 ## Install (~5 minutes)
 
 One action per step. Code links open the **raw** file, so `⌘A`/`Ctrl+A` selects exactly what you
