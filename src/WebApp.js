@@ -89,8 +89,10 @@ function renderDashboard(notice) {
     (notice ? '<div class="notice">' + escapeHtml(notice) + '</div>' : '') +
     pendingCard(url, senders) +
     exemptionsCard(url) +
-    sendersCard(url, 'Approved senders', verdicts.approved, true) +
-    sendersCard(url, 'Rejected senders', verdicts.rejected, false) +
+    sendersCard(url, 'Approved senders', verdicts.approved, true, '') +
+    sendersCard(url, 'Rejected emails', verdicts.rejected, false,
+      'Rejected emails are not deleted. They stay in your Gmail under the “' + LABELS.rejected +
+      '” label — you can read them, and even reply to them.') +
     '</div></div></body></html>'
   );
 }
@@ -238,7 +240,7 @@ function exemptionBlock(url, type, title, hint) {
 
 // Approved and rejected sender lists share one card layout; only the
 // approved card carries the Add control.
-function sendersCard(url, title, emails, withAdder) {
+function sendersCard(url, title, emails, withAdder, hint) {
   const rows =
     emails.length === 0
       ? '<p class="muted">none yet</p>'
@@ -266,6 +268,7 @@ function sendersCard(url, title, emails, withAdder) {
     '<div class="card"><div class="card-head"><div class="card-title">' +
     '<h2>' + title + '</h2><span class="count">' + emails.length + '</span>' +
     '</div>' + adder + '</div>' +
+    (hint ? '<p class="hint">' + hint + '</p>' : '') +
     '<div class="list">' + rows + '</div></div>'
   );
 }
