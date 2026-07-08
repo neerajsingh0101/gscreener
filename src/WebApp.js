@@ -91,8 +91,8 @@ function renderDashboard(notice) {
     exemptionsCard(url) +
     sendersCard(url, 'Approved senders', verdicts.approved, true, '') +
     sendersCard(url, 'Rejected emails', verdicts.rejected, false,
-      'Rejected emails are not deleted. They stay in your Gmail under the “' + LABELS.rejected +
-      '” label — you can read them, and even reply to them.') +
+      'Rejected emails are not deleted. They stay in your Gmail under Labels &gt; More &gt; ' +
+      LABELS.rejected + ' label — you can read them, and even reply to them.') +
     '</div></div></body></html>'
   );
 }
