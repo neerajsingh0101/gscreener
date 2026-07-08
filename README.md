@@ -12,22 +12,19 @@ People you write to are approved automatically.
 Nothing is ever deleted. Rejected mail stays in your Gmail under `@Screener/Rejected` — searchable,
 recoverable, just never in your inbox.
 
-## Under the hood
+## Contents
 
-1. `setup()` creates three labels and one catch-all Gmail filter ("larger:1" matches every email)
-   that makes all incoming mail skip the inbox and land in a hidden `@Screener/Triage` label.
-2. A time trigger runs `screenNewMail()` every minute. Mail from approved senders is moved to the
-   inbox (you'll rarely notice the ≤1 minute delay). Mail from rejected senders goes to
-   `@Screener/Rejected`. Mail matching an [exemption](#exemptions) — sender domain or subject
-   keyword — is delivered immediately even from unknown senders. Everyone else waits in
-   `@Screener/Pending`.
-3. The same pass scans your Sent mail: anyone you email is added to the approved list.
-4. Once a day, `sendDigest()` emails you the list of senders awaiting review with 👍/👎 buttons.
-   The buttons hit a private web app (`doGet`) only your Google account can access, which also
-   serves a dashboard with your pending/approved/rejected lists.
-
-Your sender lists live in the script's own storage (Script Properties). Your mail never leaves
-Gmail; the script only reads message headers (From/To/Subject) and moves labels around.
+- [Cost](#cost)
+- [Security](#security)
+- [Install (~5 minutes)](#install-5-minutes)
+- [Updating code](#updating-code)
+- [Daily use](#daily-use)
+- [The Gmail side panel](#the-gmail-side-panel)
+- [Exemptions](#exemptions)
+- [Things to know](#things-to-know)
+- [How it works](#how-it-works)
+- [Uninstall](#uninstall)
+- [License](#license)
 
 ## Cost
 
@@ -126,7 +123,7 @@ need to copy.
 That's it. Screening starts immediately: new senders pile up in `@Screener/Pending`, your digest
 arrives daily at 8am (change `DIGEST_HOUR` in `Config.js`), and the dashboard is at the web app URL.
 
-## Updating
+## Updating code
 
 When code in this repo changes and you want it on your install:
 
@@ -233,6 +230,23 @@ Three deliberate design decisions worth knowing:
   primary.
 - **Storage:** rejected mail still counts toward your Gmail storage. If a rejected sender is
   high-volume, occasionally empty the label (or add your own cleanup rule).
+
+## How it works
+
+1. `setup()` creates three labels and one catch-all Gmail filter ("larger:1" matches every email)
+   that makes all incoming mail skip the inbox and land in a hidden `@Screener/Triage` label.
+2. A time trigger runs `screenNewMail()` every minute. Mail from approved senders is moved to the
+   inbox (you'll rarely notice the ≤1 minute delay). Mail from rejected senders goes to
+   `@Screener/Rejected`. Mail matching an [exemption](#exemptions) — sender domain or subject
+   keyword — is delivered immediately even from unknown senders. Everyone else waits in
+   `@Screener/Pending`.
+3. The same pass scans your Sent mail: anyone you email is added to the approved list.
+4. Once a day, `sendDigest()` emails you the list of senders awaiting review with 👍/👎 buttons.
+   The buttons hit a private web app (`doGet`) only your Google account can access, which also
+   serves a dashboard with your pending/approved/rejected lists.
+
+Your sender lists live in the script's own storage (Script Properties). Your mail never leaves
+Gmail; the script only reads message headers (From/To/Subject) and moves labels around.
 
 ## Uninstall
 
