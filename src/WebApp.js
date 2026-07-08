@@ -84,8 +84,10 @@ function renderDashboard(notice) {
     '<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">' +
     '<style>' + dashboardCss() + '</style>' +
     '</head><body><div class="page"><div class="column">' +
-    '<header class="masthead"><h1>Gscreener Dashboard</h1>' +
-    '<p class="tagline">Manage what reaches your inbox</p></header>' +
+    '<header class="masthead">' +
+    '<img class="logo" src="https://raw.githubusercontent.com/neerajsingh0101/gscreener/main/assets/icon.png" alt="">' +
+    '<div><h1>Gscreener Dashboard</h1>' +
+    '<p class="tagline">Manage what reaches your inbox</p></div></header>' +
     (notice ? '<div class="notice">' + escapeHtml(notice) + '</div>' : '') +
     pendingCard(url, senders) +
     exemptionsCard(url) +
@@ -105,7 +107,8 @@ function dashboardCss() {
     'a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}' +
     '.page{min-height:100vh;padding:56px 24px 96px;display:flex;justify-content:center;--accent:#b25c43}' +
     '.column{width:100%;max-width:680px}' +
-    '.masthead{margin-bottom:40px}' +
+    '.masthead{display:flex;align-items:center;gap:14px;margin-bottom:40px}' +
+    '.masthead .logo{width:40px;height:40px;border-radius:9px;flex-shrink:0}' +
     '.masthead h1{font-size:22px;font-weight:700;letter-spacing:-0.02em;color:oklch(0.25 0.01 60);line-height:1.1;margin:0}' +
     '.tagline{font-size:14px;color:oklch(0.55 0.01 60);margin:4px 0 0}' +
     '.card{background:#fff;border:1px solid oklch(0.92 0.004 75);border-radius:14px;padding:24px;margin-bottom:20px;box-shadow:0 1px 2px rgba(30,25,20,0.04)}' +
