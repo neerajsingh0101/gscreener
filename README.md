@@ -21,7 +21,7 @@ People you write to are approved automatically.
 - [Cost](#cost)
 - [Security](#security)
 - [Installation steps](#installation-steps)
-  - [Install by agent](#install-by-agent)
+  - [Installation by an AI agent](#installation-by-an-ai-agent)
   - [Install manually](#install-manually)
 - [Updating code](#updating-code)
 - [Daily use](#daily-use)
@@ -53,7 +53,7 @@ security-related issue, please contact [me](https://github.com/neerajsingh0101).
 The steps below can be followed two ways: **by hand**, or **by an AI agent** that can drive a
 browser. Both paths run exactly the same steps — pick whichever suits you.
 
-### Install by agent
+### Installation by an AI agent
 
 Don't want to click through all those steps yourself? An AI agent that can drive a web browser
 can do the whole thing for you. You just handle the two moments that need a human — signing into
