@@ -66,14 +66,15 @@ function buildSenderCard(email) {
   } else if (exemption) {
     section.addWidget(statusParagraph('<b>Delivered via exemption (' + exemption + ').</b>'));
   } else {
-    section.addWidget(CardService.newTextParagraph().setText('⏳ Awaiting your verdict'));
+    // No status line needed — the Approve/Reject buttons say it themselves.
     section.addWidget(verdictButtons(email));
     const dash = webAppUrl();
     if (dash) {
-      // Small, secondary link — e.g. to approve the sender's whole domain.
+      // Secondary link — e.g. to approve the sender's whole domain. The
+      // leading <br> keeps it off the buttons. (Gmail forces link color.)
       section.addWidget(CardService.newTextParagraph().setText(
-        '<a href="' + dash + '"><font color="#5f6368">Click here</font></a>' +
-        '<font color="#5f6368"> to visit Gscreener dashboard</font>'
+        '<br><a href="' + dash + '">Click here</a>' +
+        '<font color="#5f6368"> to visit Gscreener dashboard.</font>'
       ));
     }
   }
