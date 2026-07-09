@@ -23,6 +23,7 @@ People you write to are approved automatically.
 - [Installation steps](#installation-steps)
   - [Installation by an AI agent](#installation-by-an-ai-agent)
   - [Install manually](#install-manually)
+- [How to use it](#how-to-use-it)
 - [Updating code](#updating-code)
 - [Daily use](#daily-use)
 - [The Gmail side panel](#the-gmail-side-panel)
@@ -162,6 +163,26 @@ need to copy.
 
 That's it. Screening starts immediately: new senders pile up in `Gscreener/Pending`, your digest
 arrives daily at 8am (change `DIGEST_HOUR` in `Config.js`), and the dashboard is at the web app URL.
+
+## How to use it
+
+After the installation, go to your Gmail account and follow these steps:
+
+1. In the left sidebar, under **Labels**, click **More**. (The Gscreener labels are hidden, so
+   they only appear once you expand **More**.)
+2. You'll see three labels: `Gscreener/Pending`, `Gscreener/Rejected` and `Gscreener/Triage`.
+   Click **`Gscreener/Pending`**.
+3. Open one of the held emails, then look at the right-hand side panel.
+4. Click the **Gscreener** icon — it sits just below **Contacts** and just above the **+** sign.
+5. Read the email and give the sender a 👍 **Approve** or a 👎 **Reject**.
+
+That's the whole loop. 👍 delivers this sender's mail to your inbox from now on (and releases
+anything of theirs already held); 👎 sends it to `Gscreener/Rejected` forever. Nothing is deleted
+either way.
+
+You don't have to do this every day. Once a day, Gscreener emails you a digest of everyone
+awaiting review with the same 👍/👎 buttons, and the dashboard shows the whole queue at a glance —
+see [Daily use](#daily-use).
 
 ## Updating code
 
