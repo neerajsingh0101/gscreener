@@ -52,7 +52,7 @@ function handleAddExemption(type, rawValue) {
       // A full address typed into the domain box — that's a sender approval.
       const email = normalizeEmail(value);
       const released = approveSender(email);
-      return 'That is an email address, so ' + email + ' was added to approved senders' +
+      return 'That is an email address, so ' + email + ' was added to approved emails' +
         (released ? ' — released ' + released + ' held email(s) to your inbox.' : '.');
     }
   } else {
@@ -91,7 +91,7 @@ function renderDashboard(notice) {
     (notice ? '<div class="notice">' + escapeHtml(notice) + '</div>' : '') +
     pendingCard(url, senders) +
     exemptionsCard(url) +
-    sendersCard(url, 'Approved senders', verdicts.approved, true, '') +
+    sendersCard(url, 'Approved emails', verdicts.approved, true, '') +
     sendersCard(url, 'Rejected emails', verdicts.rejected, false,
       'Rejected emails are not deleted. They stay in your Gmail under Labels &gt; More &gt; ' +
       LABELS.rejected + ' label — you can read them, and even reply to them.') +

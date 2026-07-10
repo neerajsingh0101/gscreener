@@ -261,7 +261,7 @@ Two lists (managed from the dashboard) let mail bypass screening entirely:
 
 Matching for both lists is case-insensitive. There is deliberately no per-address exemption —
 exempting one address is the same as approving the sender, which you can do from the dashboard
-(**Approved senders → Add**) without waiting for their first email.
+(**Approved emails → Add**) without waiting for their first email.
 
 New installs start pre-seeded with a few defaults — domains `github.com` and `stripe.com`,
 keywords `login code` and `otp`. Remove any of them from the dashboard; `setup()` never re-adds
