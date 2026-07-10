@@ -1,20 +1,19 @@
 # Gscreener
 
-Email is a beautiful thing. However, these days anyone can send an email to you, and that leads
-to all kinds of spam. To prevent this, I like to control the situation.
+Gscreener brings HEY-style [email screening](https://www.hey.com/features/the-screener) to Gmail.
 
-[HEY](https://www.hey.com/features/the-screener/) introduced a screener service, which I really
-like. But because I am so intertwined with the Google Workspace ecosystem, I could not move to
-HEY. So, inspired by their Screener, I built Gscreener.
+Anyone can send you an email, which makes it easy for spam and unwanted messages to reach your inbox. HEY⁠￼ solves this with its Screener. 
+I liked the idea, but I wanted to keep using Gmail and Google Workspace, so I built Gscreener.
 
-No servers, no third-party services, and no cost. The script lives in your Google account, runs
-on Google's infrastructure, and never sends your email anywhere. Nothing is ever deleted — you
-are in full control.
+Gscreener is free and runs entirely inside your Google account. There are no servers, subscriptions, or third-party services. 
+Your emails never leave Google, and nothing is deleted.
 
-**How it works:** email from anyone not on your approved list never reaches your inbox. It waits
-under a `Gscreener/Pending` label until you give the sender a 👍 (deliver now and forever) or a 👎
-(never see them again). A daily digest email lists everyone awaiting review with one-click buttons.
-People you write to are approved automatically.
+When an unknown sender emails you, their message is held until you approve or reject them:
+
+* **Approve**: Deliver their emails now and in the future.
+* **Reject**: Keep their emails out of your inbox.
+
+Gscreener sends you a daily digest of emails waiting for review. You can also manage them from the dashboard or the Gmail side panel.
 
 <img width="1542" height="538" alt="CleanShot 2026-07-10 at 00 57 41" src="https://github.com/user-attachments/assets/f98c8b77-17d7-4aeb-bea9-cd1ee992085c" />
 
