@@ -91,77 +91,65 @@ A normal chat at [claude.ai](http://claude.ai) or [chatgpt.com](http://chatgpt.c
 * Claude in Chrome: A Chrome extension available with paid Claude plans. Install it from [claude.com/claude-for-chrome⁠](https://claude.com/claude-for-chrome)￼.
 * ChatGPT agent mode: Available in supported ChatGPT plans. See [ChatGPT agent](https://chatgpt.com/features/agent/)⁠￼.
 
+Give your agent the following prompt.
+
+> Install Gscreener by following the steps at
+> https://github.com/neerajsingh0101/gscreener/blob/main/docs/installation-steps.md
+>
+> Complete all steps through deploying the web app. Do the clicking and pasting yourself.
+> 
+> Pause when Google asks me to sign in or when the “Gscreener wants access” permission screen appears. Let me complete those steps, and then continue.
+> 
+> Do not install the Gmail side panel.
+>
+> When you finish, show me the dashboard URL. Then show me how to enable the Gmail side panel using:
+> https://github.com/neerajsingh0101/gscreener#enable-the-gmail-side-panel
 
 
+### Enable the Gmail side panel
 
+The agent cannot complete this part because it must be done inside your browser and not the automated browser controlled by the Agent.
 
-  
-One catch worth knowing: plain chat at **claude.ai** or **chatgpt.com** can't do part 1 on its
-own. Those answer in text; they can't click buttons inside your browser. You need a version that
-can actually *control a browser*:
+To enable the Gmail side panel:
 
-- **Claude Code** or **Codex** — if you already use either, you're all set: they can drive a
-  browser, so the install just works. Point them at this README and go.
-- **Claude in Chrome** — a browser extension (included with paid Claude plans) that clicks and
-  types in your own Chrome, where you're already signed into Google. Get it at
-  [claude.com/claude-for-chrome](https://claude.com/claude-for-chrome).
-- **ChatGPT agent mode** — turn on **Agent** in ChatGPT (Plus and up); it runs its own browser
-  and pauses for you to sign in when needed. See [ChatGPT agent](https://chatgpt.com/features/agent/).
+1. Open [script.google.com](https://script.google.com) .
+2. Open your **Gscreener** project.
+3. Click **Deploy** in the top-right corner.
+4. Click **Test deployments**.
+5. Click **Install**, and then click **Done**.
+6. Reload Gmail.
+7. Open any email.
+8. Click the **Gscreener** icon in the right-hand side panel. It appears below **Contacts** and above the + icon.
+9. The first time you open it, click **Authorize access** and approve the request.
+    
+## How to use Gscreener
 
-Once it can see your browser, paste this:
+When an unknown sender emails you, Gscreener holds the email until you approve or reject the sender.
 
-> Install Gscreener for me by following the steps in
-> https://github.com/neerajsingh0101/gscreener/blob/main/docs/installation-steps.md, up to and
-> including deploying the web app. Do all the clicking and pasting yourself. Two moments need me:
-> when Google asks me to sign in, and when the "Gscreener wants access" permission screen appears
-> — pause and let me handle those, then keep going. Do not install the Gmail side panel
-> yourself. When you're finished, show me my dashboard URL, then print the one step left for me to
-> do by hand — turning on the side panel — and link me to
-> https://github.com/neerajsingh0101/gscreener#making-gmail-side-panel-work.
+To review a held email:
 
-You'll be needed at two moments during part 1 — the Google sign-in and the permission approval
-(the agent can't and shouldn't know your password or grant Gmail access for you) — and then
-once more for part 2. The agent does everything else.
+1. Open Gmail.
+2. In the left sidebar, click **More** under **Labels**.
+3. Open Gscreener/Pending.
+4. Open one of the held emails.
+5. Click the **Gscreener** icon in the right-hand side panel.
+6. Approve or reject the sender.
 
-## Making Gmail side panel work
+When you approve an email:
 
-This is the part the agent leaves to you — it has to happen inside your own Gmail, and it takes
-about a minute.
+* Their held emails are moved to your inbox.
+* Future emails from them are delivered to your inbox.
 
-The payoff: open a held email in Gmail and the **Gscreener card** in the right-hand side panel
-shows the sender's status with the same 👍 Approve / 👎 Reject buttons, so you can
-decide while reading. Opening it with no email selected lists everyone awaiting review, and it
-works in the Gmail mobile apps too. (Buttons can't go in the email body — Gmail messages are
-immutable once delivered — so a side-panel card is as close as Gmail allows.)
+When you reject an email:
 
-1. Open [script.google.com](https://script.google.com) and click your **Gscreener** project.
-2. Click **Deploy** (top right), then **Test deployments**.
-3. In the dialog, click **Install**, then **Done**.
-4. Reload your Gmail tab, open any email, and click the **Gscreener icon** in the right-hand side
-   panel (just below **Contacts**, just above the **+**).
-5. The first time only: click **Authorize access** in the panel and approve.
+* Their emails are moved to Gscreener/Rejected.
+* Future emails from them stay out of your inbox.
 
-## How to use it
+No emails are deleted.
 
-After the installation, go to your Gmail account and follow these steps:
+You do not need to check the Pending label every day. Gscreener sends a daily digest when someone is waiting for review. You can also review all pending senders from the dashboard.
 
-1. In the left sidebar, under **Labels**, click **More**. (The Gscreener labels are hidden, so
-   they only appear once you expand **More**.)
-2. You'll see three labels: `Gscreener/Pending`, `Gscreener/Rejected` and `Gscreener/Triage`.
-   Click **`Gscreener/Pending`**.
-3. Open one of the held emails, then look at the right-hand side panel.
-4. Click the **Gscreener** icon — it sits just below **Contacts** and just above the **+** sign.
-5. Read the email and give the sender a 👍 **Approve** or a 👎 **Reject**.
-
-That's the whole loop. 👍 delivers this sender's mail to your inbox from now on (and releases
-anything of theirs already held); 👎 sends it to `Gscreener/Rejected` forever. Nothing is deleted
-either way.
-
-You don't have to do this every day. Once a day, Gscreener emails you a digest of everyone
-awaiting review with the same 👍/👎 buttons, and the dashboard shows the whole queue at a glance —
-see [Daily use](#daily-use).
-
-## Updating code
+## Updating Gscreener
 
 When code in this repo changes and you want it on your install:
 
