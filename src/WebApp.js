@@ -79,6 +79,11 @@ function renderDashboard(notice) {
 
   return (
     '<!doctype html><html><head><meta name="viewport" content="width=device-width, initial-scale=1">' +
+    // The dashboard renders inside a sandboxed googleusercontent.com iframe.
+    // Without this, every link/form navigates that iframe to script.google.com,
+    // which refuses to be framed ("refused to connect"). _top navigates the
+    // whole window instead. (The Gmail "read mail" links set _blank to override.)
+    '<base target="_top">' +
     '<link rel="preconnect" href="https://fonts.googleapis.com">' +
     '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
     '<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">' +
