@@ -179,49 +179,54 @@ It is safe to run setup() more than once. It repairs the labels, Gmail filter, a
 
 It does not overwrite lists you have changed or restore entries you removed.
 
-## Daily use
-
-- **Digest email** — arrives only on days something is pending. 👍 delivers all held mail from that
-  sender to your inbox and approves them forever; 👎 moves their mail to `Gscreener/Rejected` and
-  blocks them forever.
-- **Dashboard** (web app URL) — same buttons, any time, plus the Exemptions section and your
-  approved/rejected sender lists, where you can add or remove senders directly. Each pending
-  sender's name links to their held mail in Gmail so you can read before deciding.
-- **Gmail side panel** — read a held email in Gmail and approve/reject its sender right next to
-  it; see [Making Gmail side panel work](#making-gmail-side-panel-work).
-- **From the editor** — `approveSender('a@b.com')`, `rejectSender('a@b.com')`,
-  `addExemption('keywords', 'login code')`, or re-run `setup()` to repair labels/filter/triggers.
 
 ## Exemptions
 
-Two lists (managed from the dashboard) let mail bypass screening entirely:
+Exemptions allow certain emails to bypass screening.
 
-- **Domains** — `github.com` delivers mail from any `…@github.com` address, subdomains included
-  (`notifications@mail.github.com` matches too).
-- **Subject keywords** — if the subject contains the phrase (substring match), the email is
-  delivered no matter who sent it. `login code`, `OTP`, `password` and `verification` cover most
-  sign-in, sign-up and password-reset flows.
+You can manage two exemption lists from the dashboard.
 
-Matching for both lists is case-insensitive. There is deliberately no per-address exemption —
-exempting one address is the same as approving the sender, which you can do from the dashboard
-(**Approved emails → Add**) without waiting for their first email.
+### Domains
 
-New installs start pre-seeded with a few defaults — domains `github.com` and `stripe.com`,
-keywords `login code` and `otp`. Remove any of them from the dashboard; `setup()` never re-adds
-entries you've removed.
+Adding github.com allows emails from any @github.com address.
 
-Three deliberate design decisions worth knowing:
+Subdomains are included, so an address such as notifications@mail.github.com also matches.
 
-1. **Exemption ≠ approval.** A keyword-exempted OTP email is delivered, but its sender stays
-   unapproved — their next ordinary email is still screened. That's what you want for `noreply@`
-   senders that send one login code and then start sending marketing.
-2. **An explicit 👎 always beats an exemption.** If you rejected someone at an exempted domain,
-   they stay rejected. Same for keywords: if a person you explicitly rejected sends an email
-   containing one of your exemption keywords, it will not be delivered — an explicit rejection
-   always wins.
-3. **Exemptions apply retroactively.** Adding `github.com` while twelve GitHub emails sit in
-   `Gscreener/Pending` immediately releases all twelve to your inbox (`rescreenPending()`
-   re-checks everything held and reports the count in the dashboard notice).
+### Subject keywords
+
+An email is delivered when its subject contains one of your exempted phrases.
+
+Matching is case-insensitive and checks whether the phrase appears anywhere in the subject.
+
+Useful examples include:
+
+* login code
+* OTP
+* password
+* verification
+
+### Exemption does not mean approval
+
+An exempted email is delivered, but its sender is not approved.
+
+For example, an OTP email from a new noreply@ address may be delivered because its subject contains OTP. A later marketing email from the same address will still be screened.
+
+### Rejection takes priority
+
+An explicit rejection always overrides an exemption.
+
+For example, an email will not be delivered when:
+
+* You rejected the sender, even though their domain is exempted.
+* You rejected the sender, even though the subject contains an exempted keyword.
+
+### Exemptions also apply to held emails
+
+When you add an exemption, Gscreener checks the emails already in Gscreener/Pending.
+
+For example, if twelve GitHub emails are waiting and you add github.com, all twelve are released to your inbox.
+
+The dashboard shows how many emails were released.
 
 ## Things to know
 
