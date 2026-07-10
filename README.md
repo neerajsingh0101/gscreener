@@ -151,23 +151,33 @@ You do not need to check the Pending label every day. Gscreener sends a daily di
 
 ## Updating Gscreener
 
-When code in this repo changes and you want it on your install:
+To install changes from this repository:
 
-1. Open your project at [script.google.com](https://script.google.com).
-2. Open each changed file, select everything, paste the new raw contents, and save (`⌘S`/`Ctrl+S`).
-3. Screening and digest changes take effect immediately — the triggers always run the latest
-   saved code.
-4. Dashboard (`WebApp`) changes additionally need a new deployment version, because the web app
-   URL serves a frozen snapshot:
-   1. Click **Deploy** → **Manage deployments**.
-   2. Click the **pencil icon**.
-   3. Under **Version**, choose **New version**.
-   4. Click **Deploy**, then **Done**. (The URL — and your bookmark — stay the same.)
-5. Finish every update by re-running `setup()` — always, even when `Setup.gs` itself didn't
-   change: click `Setup.gs` in the Files list, choose `setup` in the toolbar dropdown, and click
-   **Run**. `setup()` is idempotent, so running it any number of times is safe: it repairs the
-   labels, filter and triggers, and seeds any newly added defaults — without ever touching lists
-   you've changed or entries you've removed.
+1. Open your project at [script.google.com](https://script.google.com)⁠￼.
+2. Open each file that changed.
+3. Replace its contents with the latest version from this repository.
+4. Save the file using ⌘S on macOS or Ctrl+S on Windows and Linux.
+
+Changes to screening and digest emails take effect as soon as you save them.
+
+Changes to the dashboard require a new deployment version:
+
+1. Click **Deploy** → **Manage deployments**.
+2. Click the pencil icon.
+3. Under **Version**, select **New version**.
+4. Click Deploy, and then click Done.
+
+Your dashboard URL does not change.
+
+After every update, run setup():
+
+1. Open Setup.gs.
+2. Select setup from the function menu in the toolbar.
+3. Click **Run**.
+
+It is safe to run setup() more than once. It repairs the labels, Gmail filter, and triggers. It also adds any new default settings.
+
+It does not overwrite lists you have changed or restore entries you removed.
 
 ## Daily use
 
