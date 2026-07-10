@@ -316,8 +316,6 @@ It then handles the message based on the sender:
 
 That is the basic system: one Gmail filter moves all incoming mail out of the inbox, and a script sorts it.
 
-Gscreener only reads the message headers it needs, including From, To, and Subject. It does not send your email anywhere.
-
 The three Gscreener labels are normally hidden from the Gmail sidebar. Most of the time, you review pending senders from the dashboard, digest email, or Gmail side panel.
 
 ### Data privacy
