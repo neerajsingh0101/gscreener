@@ -134,7 +134,7 @@ To enable the Gmail side panel:
 5. Click **Install**, and then click **Done**.
 6. Reload Gmail.
 7. Open any email.
-8. Click the **Gscreener** icon in the right-hand side panel. It appears below **Contacts** and above the + icon.
+8. Click the **Gscreener** icon in the right-hand side panel — the **yellow and orange** icon, below the **Contacts** icon and above the **+** icon. (Everything in this panel is an icon, not a labelled word.)
 9. The first time you open it, click **Grant permission** and approve the request.
     
 ## How to use Gscreener
