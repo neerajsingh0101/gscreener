@@ -134,14 +134,19 @@ To enable the Gmail side panel:
 2. Open your **Gscreener** project.
 3. Click **Deploy** in the top-right corner.
 4. Click **Test deployments**.
-5. Click **Install**, and then click **Done**.
-6. Reload Gmail.
-7. Open any email.
-8. Click the **Gscreener** icon in the right-hand side panel — the **yellow and orange** icon, below the **Contacts** icon and above the **+** icon. (Everything in this panel is an icon, not a labelled word.)
+5. If the dialog shows **Uninstall**, click it first. That means an older copy of Gscreener is already in your side panel, and installing on top of it leaves you with two Gscreener icons.
+6. Click **Install**, and then click **Done**.
+7. Reload Gmail.
+8. Open any email.
+9. Click the **Gscreener** icon in the right-hand side panel — the **yellow and orange** icon, below the **Contacts** icon and above the **+** icon. (Everything in this panel is an icon, not a labelled word.)
 
    <img src="assets/side-panel-icon.png" alt="Gmail's right-hand icon strip with the yellow-and-orange Gscreener icon circled in red" width="60">
 
-9. The first time you open it, click **Grant permission** and approve the request.
+10. The first time you open it, click **Grant permission** and approve the request.
+
+If you end up with two Gscreener icons anyway, an add-on from an *earlier* Gscreener project is
+still installed — deleting that project does not remove it. Open that old project (restore it from
+your Drive trash if you deleted it) and use **Deploy → Test deployments → Uninstall** to remove it.
     
 ## How to use Gscreener
 
