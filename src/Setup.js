@@ -56,17 +56,30 @@ function ensureLabels() {
 
 // One catch-all filter: every incoming email skips the inbox and lands in the
 // triage label. The screener then delivers, holds or rejects it within
-// POLL_MINUTES. "larger:1" matches every email ever sent.
+// POLL_MINUTES. "larger:1" matches every email; "-from:me" excludes your own
+// mail, so your outgoing messages stay in Sent and the self-addressed digest
+// lands in your inbox directly — neither is ever screened. (Gmail evaluates
+// filters against sent mail too; without this, your own sent mail was routed
+// through triage and then delivered back to your inbox as an approved sender.)
+const FILTER_QUERY = 'larger:1 -from:me';
+
 function ensureFilter(triageLabelId) {
   const filters = Gmail.Users.Settings.Filters.list('me').filter || [];
-  const exists = filters.some(function (f) {
+  const triageFilters = filters.filter(function (f) {
     return f.action && (f.action.addLabelIds || []).indexOf(triageLabelId) !== -1;
   });
-  if (exists) return;
+
+  // Already have the right filter? Nothing to do.
+  if (triageFilters.some(function (f) { return (f.criteria || {}).query === FILTER_QUERY; })) return;
+
+  // Remove any stale-criteria triage filters (e.g. the old bare "larger:1" that
+  // also swept up your own sent mail) so re-running setup migrates cleanly
+  // without stacking duplicates.
+  triageFilters.forEach(function (f) { Gmail.Users.Settings.Filters.remove('me', f.id); });
 
   const created = Gmail.Users.Settings.Filters.create(
     {
-      criteria: { query: 'larger:1' },
+      criteria: { query: FILTER_QUERY },
       action: { removeLabelIds: ['INBOX'], addLabelIds: [triageLabelId] },
     },
     'me'

@@ -31,9 +31,10 @@ function sendDigest() {
     'Gscreener Digest: ' + senders.length + (senders.length === 1 ? ' sender' : ' senders') + ' awaiting review';
   const messageId = sendHtmlEmail(getConfig('selfEmail'), subject, html);
 
-  // The catch-all filter routes even this digest away from the inbox; put it
-  // straight back. (Your own address is also on the approved list, so the
-  // screening loop would deliver it anyway within a minute.)
+  // Belt and suspenders: the catch-all filter now excludes your own mail
+  // (-from:me), so the digest already lands in your inbox untriaged. Re-assert
+  // INBOX anyway so the digest still arrives on installs not yet migrated off
+  // the older bare "larger:1" filter.
   Gmail.Users.Messages.modify(
     { addLabelIds: ['INBOX'], removeLabelIds: [getConfig('labelTriage')] },
     'me',
