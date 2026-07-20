@@ -7,7 +7,7 @@
 // Bump this by hand when you cut a release (like a gem's version file).
 // setup() records it and the dashboard shows it, so you and your friends can
 // tell which version an install is running.
-const VERSION = '1.1';
+const VERSION = '1.2';
 
 const DIGEST_HOUR = 8; // 0-23, in the script's time zone (appsscript.json)
 const POLL_MINUTES = 1; // how often new mail is screened: 1, 5, 10, 15 or 30
