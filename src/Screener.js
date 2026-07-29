@@ -44,6 +44,13 @@ function triageNewMessages(triageId) {
 
 // Anyone you write to is someone you know: recipients of your outgoing mail
 // are approved automatically (unless you already rejected them explicitly).
+//
+// Approving goes through approveSender, not a bare setVerdict, so mail of
+// theirs already sitting in the pending label is released too. Writing only
+// the verdict left that mail held forever: triage looks at the triage label,
+// and rescreenPending only re-checks exemptions, so nothing ever revisited
+// it. Someone who emailed you before you first wrote to them stayed pending
+// no matter how long you waited.
 function autoApproveSentRecipients() {
   const since = Number(getConfig('lastSentScan') || 0);
   const now = Math.floor(Date.now() / 1000);
@@ -63,7 +70,7 @@ function autoApproveSentRecipients() {
       const value = headerValue(message, name);
       if (!value) return;
       extractAddresses(value).forEach(function (email) {
-        if (!getVerdict(email)) setVerdict(email, VERDICT.approved);
+        if (!getVerdict(email)) approveSender(email);
       });
     });
   });

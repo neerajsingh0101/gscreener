@@ -161,6 +161,11 @@ To review a held email:
 5. Click the **Gscreener** icon in the right-hand side panel.
 6. Approve or reject the sender.
 
+If several people have written in the same conversation, the side panel lists every one of them, with
+the ones still awaiting your verdict at the top. Each person is screened on their own, so a
+conversation can be half approved and half held — approve whoever is still waiting and their held
+emails move to your inbox.
+
 When you approve an email:
 
 * Their held emails are moved to your inbox.
