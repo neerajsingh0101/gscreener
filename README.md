@@ -39,6 +39,7 @@ Gscreener sends you a daily digest of emails waiting for review. You can also ma
 - [Things to know](#things-to-know)
 - [How it works](#how-it-works)
 - [Uninstall](#uninstall)
+- [FAQ](#faq)
 - [License](#license)
 
 ## Cost
@@ -373,6 +374,31 @@ Nothing of yours is deleted. The three Gscreener labels, every email under them,
 approved, rejected, and exemption lists are all kept exactly as they are. Held and rejected
 emails stay under their labels, which are hidden — expand **More** under **Labels** in Gmail to
 read them.
+
+## FAQ
+
+### After I approve or reject a sender, why don't I see the next pending email?
+
+Because the side panel cannot change the email you are reading.
+
+Gmail lets an add-on draw its own panel and nothing more. There is no way for it to open a
+different conversation in the main window, so after you decide, the email in front of you stays in
+front of you. Gscreener confirms the verdict in the panel and stops there.
+
+Gmail's own navigation covers this:
+
+1. Open Gscreener/Pending.
+2. Open the first held email.
+3. Approve or reject it in the side panel.
+4. Click the **Older** arrow (**>**) at the top right of the email, or press **j** if you use Gmail
+   keyboard shortcuts.
+
+The next held email opens, and the panel redraws itself for that email. You always decide on the
+message you can see. If the list has shifted because the email you just decided left the label,
+press **u** to go back to Gscreener/Pending and open the next one.
+
+To work through senders as a list instead of one email at a time, use the dashboard or your daily
+digest. Both list everyone awaiting review with Approve and Reject buttons.
 
 ## License
 
