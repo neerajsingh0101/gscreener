@@ -1,8 +1,6 @@
 // The Gmail side panel add-on: open any email and approve or reject everyone
 // who has written in it, without leaving Gmail. With no email open, the
-// add-on's home card lists everyone awaiting review. Once the email you are on
-// has nothing left to decide, the panel hands you the next held email, so a
-// backlog can be cleared in one sitting. Enabled via
+// add-on's home card lists everyone awaiting review. Enabled via
 // Deploy > Test deployments > Install (see README).
 
 // How many people a thread card lists before it stops. Undecided senders are
@@ -84,7 +82,7 @@ function onAddOnHomepage() {
         .setBottomLabel(sender.count + ' held · ' + sender.latestSubject)
         .setWrapText(true)
     );
-    section.addWidget(verdictButtons(sender.email, '', 'home'));
+    section.addWidget(verdictButtons(sender.email));
   });
   if (senders.length > 25) {
     section.addWidget(
@@ -183,52 +181,6 @@ function buildThreadCard(senders, threadId) {
     .build();
 }
 
-// The queue card: the next held email, shown once the conversation you were
-// on has nothing left to decide. Deciding here pulls up the one after it, so
-// the whole backlog can be worked through from the panel — Gmail gives an
-// add-on no way to open a thread itself, hence the link to go read it.
-function buildNextCard(next) {
-  const section = CardService.newCardSection();
-
-  if (!next) {
-    section.addWidget(
-      CardService.newTextParagraph().setText('Nothing left to review. Enjoy the quiet inbox.')
-    );
-    return queueCard(section, 'All caught up');
-  }
-
-  const row = CardService.newDecoratedText()
-    .setText('<b>' + escapeHtml(next.email) + '</b>')
-    .setBottomLabel(next.subject)
-    .setWrapText(true);
-  if (next.name !== next.email) row.setTopLabel(next.name);
-  section.addWidget(row);
-  section.addWidget(verdictButtons(next.email, next.threadId, 'next'));
-  section.addWidget(
-    CardService.newTextButton()
-      .setText('Open this email')
-      .setOpenLink(CardService.newOpenLink().setUrl(gmailThreadUrl(next.threadId)))
-  );
-
-  const link = dashboardLink();
-  if (link) section.addWidget(link);
-
-  return queueCard(section, 'Next email awaiting review');
-}
-
-function queueCard(section, subtitle) {
-  return CardService.newCardBuilder()
-    .setHeader(CardService.newCardHeader().setTitle('Gscreener').setSubtitle(subtitle))
-    .addSection(section)
-    .build();
-}
-
-// Held mail is archived under the pending label, so the thread is opened from
-// All Mail rather than the inbox.
-function gmailThreadUrl(threadId) {
-  return 'https://mail.google.com/mail/u/0/#all/' + threadId;
-}
-
 // Secondary link — e.g. to approve a sender's whole domain. The leading <br>
 // keeps it off the buttons. (Gmail forces link color.)
 function dashboardLink() {
@@ -248,10 +200,8 @@ function statusParagraph(statusHtml) {
 
 // The thread id rides along so the refreshed card can be rebuilt from the
 // whole conversation. It is empty for the home card, which has no thread.
-// `source` names the card these buttons sit on, which decides where the next
-// card comes from — see addonNextCard.
-function verdictButtons(email, threadId, source) {
-  const parameters = { email: email, threadId: threadId || '', source: source || 'thread' };
+function verdictButtons(email, threadId) {
+  const parameters = { email: email, threadId: threadId || '' };
   return CardService.newButtonSet()
     .addButton(
       CardService.newTextButton()
@@ -275,50 +225,23 @@ function verdictButtons(email, threadId, source) {
 
 function addonApprove(e) {
   approveSender(e.parameters.email);
-  return addonActionResponse(e.parameters, VERDICT.approved);
+  return addonActionResponse(e.parameters);
 }
 
 function addonReject(e) {
   rejectSender(e.parameters.email);
-  return addonActionResponse(e.parameters, VERDICT.rejected);
+  return addonActionResponse(e.parameters);
 }
 
-// A toast confirms the verdict just given, which frees the card itself to move
-// on to the next decision instead of restating one already made.
-function addonActionResponse(parameters, verdict) {
-  const email = normalizeEmail(parameters.email);
+// The refreshed card is the confirmation — no toast needed. A verdict given
+// from a thread card redraws the thread, so everyone else stays in view.
+function addonActionResponse(parameters) {
+  const senders = threadSenders(parameters.threadId);
+  const card =
+    senders.length > 1
+      ? buildThreadCard(senders, parameters.threadId)
+      : buildSenderCard(normalizeEmail(parameters.email), parameters.threadId);
   return CardService.newActionResponseBuilder()
-    .setNotification(
-      CardService.newNotification().setText(
-        (verdict === VERDICT.approved ? 'Approved ' : 'Rejected ') + email
-      )
-    )
-    .setNavigation(CardService.newNavigation().updateCard(addonNextCard(parameters, email)))
+    .setNavigation(CardService.newNavigation().updateCard(card))
     .build();
-}
-
-// Where the panel goes after a verdict. Whatever still needs deciding closest
-// to hand wins:
-//
-//   home   — the home card already IS the queue, so redraw it: the sender just
-//            decided drops off and the rest stay where they were.
-//   thread — someone else in this conversation is still waiting, so finish the
-//            thread before leaving it.
-//   else   — nothing left to decide here, so pull up the next held email.
-function addonNextCard(parameters, decided) {
-  if (parameters.source === 'home') return onAddOnHomepage();
-
-  if (parameters.source !== 'next') {
-    const senders = threadSenders(parameters.threadId);
-    const stillWaiting = senders.some(function (email) {
-      return !senderStatus(email);
-    });
-    if (stillWaiting) {
-      return senders.length > 1
-        ? buildThreadCard(senders, parameters.threadId)
-        : buildSenderCard(senders[0], parameters.threadId);
-    }
-  }
-
-  return buildNextCard(nextPendingEmail([decided]));
 }

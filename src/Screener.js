@@ -197,41 +197,6 @@ function matchesAnyFilter(messageId, queries) {
   });
 }
 
-// The next held email still awaiting a verdict, newest first, or null when
-// nothing is left to decide. This is what the side panel hands you after a
-// verdict, so it stops at the first undecided sender instead of reading every
-// held message the way pendingSenders does — on a normal queue that is a
-// single metadata fetch.
-//
-// `skipEmails` drops senders decided moments ago: approveSender and
-// rejectSender find their held mail through Gmail search, whose index can lag
-// a beat, so a message of theirs may still be listed under the pending label.
-function nextPendingEmail(skipEmails) {
-  const skip = {};
-  (skipEmails || []).forEach(function (email) {
-    skip[normalizeEmail(email)] = true;
-  });
-
-  const ids = listMessageIds({ labelIds: [getConfig('labelPending')] });
-  for (let i = 0; i < ids.length; i++) {
-    const message = Gmail.Users.Messages.get('me', ids[i], {
-      format: 'metadata',
-      metadataHeaders: ['From', 'Subject'],
-    });
-    const from = headerValue(message, 'From');
-    if (!from) continue;
-    const email = normalizeEmail(from);
-    if (skip[email] || getVerdict(email)) continue;
-    return {
-      email: email,
-      name: displayName(from),
-      subject: headerValue(message, 'Subject') || '(no subject)',
-      threadId: message.threadId,
-    };
-  }
-  return null;
-}
-
 // Senders currently awaiting a verdict, newest activity first.
 function pendingSenders() {
   const ids = listMessageIds({ labelIds: [getConfig('labelPending')] });
