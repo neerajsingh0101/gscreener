@@ -64,7 +64,7 @@ When you approve Gscreener, Google shows a broad-sounding consent screen. Google
 * **"Read, compose, and send email."** Gscreener reads the From, To, and Subject headers, moves messages between your inbox and its labels, and sends you your daily digest. It never emails anyone but you. This level also cannot permanently delete mail — that needs a broader permission Gscreener deliberately does not request — which is why nothing is ever erased.
 * **"Change your mail settings and filters."** Gscreener creates the single catch-all filter that pulls new mail out of your inbox for screening, and removes that filter when you uninstall. It changes nothing else.
 * **Manage Apps Script triggers.** Runs the once-a-minute sorting pass and sends the daily digest on schedule.
-* **Gmail add-on.** Draws the Approve/Reject card while you read a message. It sees only that message's metadata.
+* **Gmail add-on.** Draws the Approve/Reject card in the side panel. Of the message you have open it sees only the metadata; the held mail it lists — sender and subject — it reads from the Gscreener/Pending label.
 
 No software is completely free of security risks. If you find a security issue, please contact [me](https://github.com/neerajsingh0101).
 
@@ -165,6 +165,11 @@ If several people have written in the same conversation, the side panel lists ev
 the ones still awaiting your verdict at the top. Each person is screened on their own, so a
 conversation can be half approved and half held — approve whoever is still waiting and their held
 emails move to your inbox.
+
+Once the conversation you are on has nothing left to decide, the side panel moves on to the next
+held email — its sender, its subject, the same Approve and Reject buttons, and a link to open it in
+Gmail. Keep deciding and it keeps handing you the next one, so you can clear the queue without
+going back to the Gscreener/Pending label between emails.
 
 When you approve an email:
 
