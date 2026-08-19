@@ -166,11 +166,6 @@ the ones still awaiting your verdict at the top. Each person is screened on thei
 conversation can be half approved and half held — approve whoever is still waiting and their held
 emails move to your inbox.
 
-Once the conversation you are on has nothing left to decide, the side panel moves on to the next
-held email — its sender, its subject, the same Approve and Reject buttons, and a link to open it in
-Gmail. Keep deciding and it keeps handing you the next one, so you can clear the queue without
-going back to the Gscreener/Pending label between emails.
-
 When you approve an email:
 
 * Their held emails are moved to your inbox.
