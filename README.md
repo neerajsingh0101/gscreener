@@ -340,6 +340,8 @@ It then handles the message based on the sender:
 * Unknown sender: Move the email to Gscreener/Pending.
 * Exempted email: Deliver it based on its sender domain or subject keyword.
 
+Once an hour, the same script also re-checks everything in Gscreener/Pending against your approved and rejected lists. Approving or rejecting a sender moves their held mail right away. If that move is cut short, the hourly check finishes it.
+
 That is the basic system: one Gmail filter moves all incoming mail out of the inbox, and a script sorts it.
 
 The three Gscreener labels are normally hidden from the Gmail sidebar. Most of the time, you review pending senders from the dashboard, digest email, or Gmail side panel.
